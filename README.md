@@ -1,13 +1,33 @@
-# KeystoneJS Starter Template
+# Blogstones
 
-You've created a KeystoneJS project! This project contains a simple list of users and an admin application (`localhost:3000/admin`) with basic authentication.
+A microservised Blog site orchestrated w/ Kubernetes. It uses Keystone.js as Headless CMS and Next.js in client (frontEnd).
 
-## Running the Project.
+## Installation
 
-To run this project first run `npm install`. Note: If you generated this project via the Keystone cli step this has been done for you \\o/.
+Use Skaffold to orchestrate this k8s app.
 
-Once running, the Keystone Admin UI is reachable via `localhost:3000/admin`.
+**if you don't have skaffold then check [here](https://skaffold.dev/docs/install/)**
 
-## Next steps
+```bash
+#  To add MONGO_URI
+kubectl create secret generic blogstone-mongo-uri --from-literal=MONGO_BLOGSTONE_URI='your mongo uri to connect'
+```
 
-This example has no front-end application but you can build your own using the GraphQL API (`http://localhost:3000/admin/graphiql`).
+## Usage
+
+```bash
+skaffold dev # to orchestrate this app
+# run server
+cd server/ && yarn dev && cd ..
+cd client/ && yarn dev && cd ..
+```
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)

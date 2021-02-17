@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      containers:
+      - name: server
+        image: bineetnaidu/blogstones-server
+        env:
+          - name: COOKIE_SECRET
+            value: 'eM7OZ84bqbTYpWLU2EIjPw=='
+          - name: MONGO_URI
+            valueFrom:
+              secretKeyRef:
+                name: blogstone-mongo-uri
+                key: MONGO_BLOGSTONE_URI
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: server-srv
+spec:
+  selector:
+    app: server
+  ports:
+    - name: server
+      port: 4242
+      protocol: TCP
+      targetPort: 4242

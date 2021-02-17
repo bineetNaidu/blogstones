@@ -5,12 +5,11 @@ const { AdminUIApp } = require('@keystonejs/app-admin-ui');
 const { MongooseAdapter: Adapter } = require('@keystonejs/adapter-mongoose');
 const initialiseData = require('./initial-data');
 
-require('dotenv').config({ debug: true });
 const userFields = require('./model/User');
 const access = require('./utils/accessControls');
 const postFields = require('./model/Post');
 
-const PROJECT_NAME = 'blogstone';
+const PROJECT_NAME = 'blogstones';
 const adapterConfig = { mongoUri: process.env.MONGO_URI };
 
 const keystone = new Keystone({
