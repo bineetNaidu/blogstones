@@ -1,0 +1,19 @@
+apiVersion: skaffold/v2beta10
+kind: Config
+metadata:
+  name: blogstone
+build:
+  artifacts:
+  - image: bineetnaidu/blogstones-server
+    context: server
+    docker:
+      dockerfile: Dockerfile
+    sync:
+      manual:
+        - src: '**/*.js'
+          dest: .
+deploy:
+  kubectl:
+    manifests:
+    - k8s/ingress-nginx-srv.yaml
+    - k8s/server-depl.yaml

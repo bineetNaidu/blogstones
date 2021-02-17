@@ -7,7 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
   rules:
-    - host: blogstone.dev
+    - host: blogstones.dev
       http:
           paths:
             - path: /api/?(.*)
