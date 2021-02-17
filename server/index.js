@@ -7,7 +7,8 @@ const initialiseData = require('./initial-data');
 
 const userFields = require('./model/User');
 const access = require('./utils/accessControls');
-const postFields = require('./model/Post');
+const blogFields = require('./model/Blog');
+const commentsField = require('./model/Comment');
 
 const PROJECT_NAME = 'blogstones';
 const adapterConfig = { mongoUri: process.env.MONGO_URI };
@@ -30,8 +31,18 @@ keystone.createList('User', {
   },
 });
 
-keystone.createList('Post', {
-  fields: postFields,
+keystone.createList('Blog', {
+  fields: blogFields,
+  access: {
+    auth: true,
+    read: true,
+    create: access.authed,
+    update: access.userIsAdminOrOwner,
+    delete: access.userIsAdminOrOwner,
+  },
+});
+keystone.createList('Comment', {
+  fields: commentsField,
   access: {
     auth: true,
     read: true,
