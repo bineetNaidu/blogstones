@@ -6,8 +6,9 @@ const { MongooseAdapter: Adapter } = require('@keystonejs/adapter-mongoose');
 const initialiseData = require('./initial-data');
 
 require('dotenv').config({ debug: true });
-const userFields = require('./model/User').default;
+const userFields = require('./model/User');
 const access = require('./utils/accessControls');
+const postFields = require('./model/Post');
 
 const PROJECT_NAME = 'blogstone';
 const adapterConfig = { mongoUri: process.env.MONGO_URI };
@@ -24,9 +25,20 @@ keystone.createList('User', {
   access: {
     read: access.userIsAdminOrOwner,
     update: access.userIsAdminOrOwner,
-    create: access.userIsAdmin,
-    delete: access.userIsAdmin,
+    create: true,
+    delete: access.userIsAdminOrOwner,
     auth: true,
+  },
+});
+
+keystone.createList('Post', {
+  fields: postFields,
+  access: {
+    auth: true,
+    read: true,
+    create: access.authed,
+    update: access.userIsAdminOrOwner,
+    delete: access.userIsAdminOrOwner,
   },
 });
 
@@ -43,7 +55,7 @@ module.exports = {
     new AdminUIApp({
       name: PROJECT_NAME,
       enableDefaultRoute: true,
-      isAccessAllowed: ({ authentication: { item } }) => !!item.isAdmin,
+      isAccessAllowed: access.userIsAdmin,
       authStrategy,
     }),
   ],

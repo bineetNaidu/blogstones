@@ -20,6 +20,13 @@ const userIsAdminOrOwner = (auth) => {
   return isAdmin ? isAdmin : isOwner;
 };
 
-const access = { userIsAdmin, userOwnsItem, userIsAdminOrOwner };
+const authed = ({ authentication }) => !!authentication.item.id;
+
+const access = {
+  userIsAdmin,
+  userOwnsItem,
+  userIsAdminOrOwner,
+  authed,
+};
 
 module.exports = access;

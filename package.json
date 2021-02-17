@@ -22,6 +22,8 @@
     "@keystonejs/app-graphql": "^6.2.0",
     "@keystonejs/auth-password": "^6.0.1",
     "@keystonejs/fields": "^22.0.0",
+    "@keystonejs/fields-authed-relationship": "^1.0.17",
+    "@keystonejs/fields-markdown": "^5.2.14",
     "@keystonejs/keystone": "^19.2.0",
     "cross-env": "^7.0.3"
   },
