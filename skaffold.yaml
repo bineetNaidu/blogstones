@@ -1,7 +1,7 @@
 apiVersion: skaffold/v2beta10
 kind: Config
 metadata:
-  name: blogstone
+  name: blogstones
 build:
   artifacts:
   - image: bineetnaidu/blogstones-server
