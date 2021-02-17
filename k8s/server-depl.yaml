@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: Fill the image
+        image: bineetnaidu/blogstones-server
         env:
           - name: COOKIE_SECRET
             value: 'eM7OZ84bqbTYpWLU2EIjPw=='
