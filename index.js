@@ -2,16 +2,15 @@ const { Keystone } = require('@keystonejs/keystone');
 const { PasswordAuthStrategy } = require('@keystonejs/auth-password');
 const { GraphQLApp } = require('@keystonejs/app-graphql');
 const { AdminUIApp } = require('@keystonejs/app-admin-ui');
+const { MongooseAdapter: Adapter } = require('@keystonejs/adapter-mongoose');
 const initialiseData = require('./initial-data');
 
 require('dotenv').config({ debug: true });
+const userFields = require('./model/User').default;
+const access = require('./utils/accessControls');
 
-const { MongooseAdapter: Adapter } = require('@keystonejs/adapter-mongoose');
 const PROJECT_NAME = 'blogstone';
 const adapterConfig = { mongoUri: process.env.MONGO_URI };
-
-const userFields = require('./model/User');
-const access = require('./utils/accessControls');
 
 const keystone = new Keystone({
   adapter: new Adapter(adapterConfig),
@@ -44,6 +43,7 @@ module.exports = {
     new AdminUIApp({
       name: PROJECT_NAME,
       enableDefaultRoute: true,
+      isAccessAllowed: ({ authentication: { item } }) => !!item.isAdmin,
       authStrategy,
     }),
   ],

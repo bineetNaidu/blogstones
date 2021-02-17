@@ -1,6 +1,7 @@
 // Access control functions
 const userIsAdmin = ({ authentication: { item: user } }) =>
-  Boolean(user && user.isAdmin);
+  // eslint-disable-next-line implicit-arrow-linebreak
+  !!(user && user.isAdmin);
 
 const userOwnsItem = ({ authentication: { item: user } }) => {
   if (!user) {
@@ -13,8 +14,9 @@ const userOwnsItem = ({ authentication: { item: user } }) => {
 };
 
 const userIsAdminOrOwner = (auth) => {
-  const isAdmin = access.userIsAdmin(auth);
-  const isOwner = access.userOwnsItem(auth);
+  const isAdmin = userIsAdmin(auth);
+  const isOwner = userOwnsItem(auth);
+  // eslint-disable-next-line no-unneeded-ternary
   return isAdmin ? isAdmin : isOwner;
 };
 
