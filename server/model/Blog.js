@@ -1,12 +1,18 @@
 // eslint-disable-next-line object-curly-newline
-const { Select, Text, DateTimeUtc, Integer } = require('@keystonejs/fields');
+const {
+  Select,
+  Text,
+  DateTimeUtc,
+  Integer,
+  Relationship,
+} = require('@keystonejs/fields');
 const { Markdown } = require('@keystonejs/fields-markdown');
 const {
   AuthedRelationship,
 } = require('@keystonejs/fields-authed-relationship');
 
-const postFields = {
-  name: { type: Text, isRequired: true },
+const blogFields = {
+  name: { type: Text, isRequired: true, isUnique: true },
   body: { type: Markdown },
   createAt: { type: DateTimeUtc, isRequired: true },
   author: { type: AuthedRelationship, ref: 'User', isRequired: true },
@@ -17,8 +23,14 @@ const postFields = {
       { value: 'UNPUBLISHED', label: 'Unpublished' },
     ],
   },
+  comments: {
+    type: Relationship,
+    ref: 'Comment',
+    many: true,
+  },
+
   likes: { type: Integer, defaultValue: 0 },
   dislikes: { type: Integer, defaultValue: 0 },
 };
 
-module.exports = postFields;
+module.exports = blogFields;
