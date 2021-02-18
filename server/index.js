@@ -23,7 +23,7 @@ keystone.createList('User', {
   fields: userFields,
   // List-level access controls
   access: {
-    read: access.userIsAdminOrOwner,
+    read: true,
     update: access.userIsAdminOrOwner,
     create: true,
     delete: access.userIsAdminOrOwner,
