@@ -20,7 +20,7 @@ const Header = () => {
             Login
           </span>
         </Link>
-        <Link href="/create">
+        <Link href="/blog/create">
           <span className="text-green-500 hover:text-white cursor-pointer text-lg transition mx-1">
             Create a Blog
           </span>
