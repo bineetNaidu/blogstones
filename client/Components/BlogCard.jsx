@@ -7,7 +7,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const BlogCard = ({ blog }) => {
-  console.log(blog);
   return (
     <Link href={'/blog/' + blog.id}>
       <a
