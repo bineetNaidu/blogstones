@@ -1,5 +1,3 @@
-import { ActionType, StateModel, TypeEnum } from '../utils/types';
-
 export const initialState = {
   blogs: [],
   user: null,
