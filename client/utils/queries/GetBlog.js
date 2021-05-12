@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const GET_BLOG = gql`
-  query($id: ID!) {
+  query ($id: ID!) {
     Blog(where: { id: $id }) {
       id
       name
