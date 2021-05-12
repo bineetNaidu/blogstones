@@ -2,6 +2,7 @@ import Head from 'next/head';
 import 'tailwindcss/tailwind.css';
 import Header from '../Components/Header';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { StateProvider } from '../stateManagement/state.context';
 
 function MyApp({ Component, pageProps }) {
   const gradientCss = {
@@ -23,8 +24,10 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <main className="min-h-screen h-full text-green-200" style={gradientCss}>
         <ApolloProvider client={client}>
-          <Header />
-          <Component {...pageProps} />
+          <StateProvider>
+            <Header />
+            <Component {...pageProps} />
+          </StateProvider>
         </ApolloProvider>
       </main>
     </>
